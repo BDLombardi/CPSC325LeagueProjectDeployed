@@ -1,7 +1,6 @@
 import streamlit as st
 from riotwatcher import LolWatcher, ApiError, RiotWatcher
 import numpy as np
-from google.cloud import bigquery
 from matplotlib.figure import Figure
 import seaborn as sns
 import pandas as pd
