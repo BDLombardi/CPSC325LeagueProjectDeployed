@@ -2,3 +2,4 @@ pandas
 riotwatcher
 numpy
 seaborn
+google.cloud
