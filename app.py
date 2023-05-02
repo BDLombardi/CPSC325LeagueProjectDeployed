@@ -117,5 +117,6 @@ elif options == "Predictors":
     infile.close()
     if model_options == "Team Comp + Baron":
         top = st.text_input("Top Laner")
-        st.write(champ_labels[top])
+        if top !='':
+            st.write(champ_labels[top])
         
