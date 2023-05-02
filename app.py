@@ -6,6 +6,7 @@ import seaborn as sns
 import pandas as pd
 import base64
 import matplotlib.pyplot as plt
+import json
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
@@ -111,3 +112,10 @@ if options == "Account Summary":
 elif options == "Predictors":
     model_options = st.selectbox('Please select a model to use. ', ["Team Comp + Baron","Team Comp + Dragon", "Team Comp + First Blood", "Team Comp + Rift Herald", "Objectives"])
     st.write(model_options)
+    infile = open("champ_labels.json","r")
+    champ_labels = json.load(infile)
+    infile.close()
+    if model_options == "Team Comp + Baron":
+        top = st.text_input("Top Laner")
+        st.write(champ_labels[top])
+        
