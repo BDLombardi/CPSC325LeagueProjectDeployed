@@ -4,4 +4,4 @@ numpy
 seaborn
 tensorflow
 joblib
-sklearn
+scikit-learn
