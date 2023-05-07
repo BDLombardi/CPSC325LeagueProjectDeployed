@@ -137,6 +137,7 @@ elif options == "Predictors":
         y_pred = comp_bf.predict(X_test)
         st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
     elif model_options == "Team Comp + Dragon":
+        st.write("Model Accuracy on Test Set: 63.9%")
         st.write("Team 1:")
         top1 = st.selectbox("Team 1: Top Laner",champ_labels.keys())
         jg1 = st.selectbox("Team 1: Jungle",champ_labels.keys())
@@ -153,9 +154,30 @@ elif options == "Predictors":
         sup2 = st.selectbox("Team 2: Support",champ_labels.keys())
         b_2 = int(st.selectbox("Team 2 Dragon First", [True,False]))
         X_test = [[champ_labels[top1],champ_labels[jg1],champ_labels[mid1],champ_labels[bot1],champ_labels[sup1],b_1,champ_labels[top2],champ_labels[jg2],champ_labels[mid2],champ_labels[bot2], champ_labels[sup2],b_2]]
-        comp_bf = tf.keras.models.load_model('pred_models/comp_dragon/64-0.6470.hdf5')
-        y_pred = comp_bf.predict(X_test)
+        comp_df = tf.keras.models.load_model('pred_models/comp_dragon/64-0.6470.hdf5')
+        y_pred = comp_df.predict(X_test)
         st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
 
+    elif model_options == "Team Comp + Rift Herald":
+        st.write("Model Accuracy on Test Set: 57.6%")
+        st.write("Team 1:")
+        top1 = st.selectbox("Team 1: Top Laner",champ_labels.keys())
+        jg1 = st.selectbox("Team 1: Jungle",champ_labels.keys())
+        mid1 = st.selectbox("Team 1: Mid",champ_labels.keys())
+        bot1 = st.selectbox("Team 1: Bot",champ_labels.keys())
+        sup1 = st.selectbox("Team 1: Support",champ_labels.keys())
+        b_1 = int(st.selectbox("Team 1 Rift Herald First", [True,False]))
+
+        st.write("Team 2:")
+        top2 = st.selectbox("Team 2: Top Laner",champ_labels.keys())
+        jg2 = st.selectbox("Team 2: Jungle",champ_labels.keys())
+        mid2 = st.selectbox("Team 2: Mid",champ_labels.keys())
+        bot2 = st.selectbox("Team 2: Bot",champ_labels.keys())
+        sup2 = st.selectbox("Team 2: Support",champ_labels.keys())
+        b_2 = int(st.selectbox("Team 2 Rift Herald First", [True,False]))
+        X_test = [[champ_labels[top1],champ_labels[jg1],champ_labels[mid1],champ_labels[bot1],champ_labels[sup1],b_1,champ_labels[top2],champ_labels[jg2],champ_labels[mid2],champ_labels[bot2], champ_labels[sup2],b_2]]
+        comp_fb = joblib.load('pred_models/comp_rf/forest_clf.pkl')
+        y_pred = comp_fb.predict(X_test)
+        st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
 
         
