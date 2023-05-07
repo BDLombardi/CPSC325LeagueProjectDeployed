@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import json
 import tensorflow as tf
 import joblib
+import sklearn
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
