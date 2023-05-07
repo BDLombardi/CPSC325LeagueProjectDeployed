@@ -3,3 +3,4 @@ riotwatcher
 numpy
 seaborn
 tensorflow
+joblib
