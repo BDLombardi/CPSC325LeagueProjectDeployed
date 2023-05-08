@@ -183,7 +183,7 @@ elif options == "Predictors":
         st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
 
     elif model_options == "Objectives":
-        st.write("Model Accuracy on Test Set: 57.6%")
+        st.write("Model Accuracy on Test Set: 90.9%")
         st.write("Team 1:")
         b_1 = int(st.selectbox("Team 1 Baron First", [True,False]))
         d_1 = int(st.selectbox("Team 1 Dragon First", [True,False]))
@@ -201,8 +201,8 @@ elif options == "Predictors":
         t_2 = int(st.selectbox("Team 2 Tower First", [True,False]))
 
         X_test = [[b_1,d_1,c_1,i_1,h_1,t_1,b_2,d_2,c_2,i_2,h_2,t_2]]
-        comp_fb = joblib.load('pred_models/obj/121-0.2676.hdf5')
-        y_pred = comp_fb.predict(X_test)
+        obj_mod = tf.keras.models.load_model('pred_models/obj/121-0.2676.hdf5')
+        y_pred = obj_mod.predict(X_test)
         st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
 
         
