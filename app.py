@@ -27,7 +27,8 @@ if options == "Account Summary":
     text_input = st.text_input('Account Name')
     if text_input != "":
         username = text_input
-        api_key = 'RGAPI-7c56ac6e-237c-476b-9ca9-4ee2fe089ca4'  
+        #api_key = 'RGAPI-7c56ac6e-237c-476b-9ca9-4ee2fe089ca4'  
+        api_key = st.secrets["KEY"]
         watcher1 = LolWatcher(api_key)
         my_region = 'na1'
 
@@ -90,7 +91,7 @@ if options == "Account Summary":
             ax.text(df.x[line], df.y[line], df.group[line], horizontalalignment='center', size='medium', color='black', weight='semibold')
         st.pyplot(fig)
 
-        fig,ax = plt.subplots(2,2)
+        fig,ax = plt.subplots(2,2,figsize=(10,10))
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
         ax[0,0].plot(game_count_list,total_deaths)
@@ -113,7 +114,7 @@ if options == "Account Summary":
 
         st.pyplot(fig)
 elif options == "Predictors":
-    model_options = st.selectbox('Please select a model to use. ', ["Team Comp + Baron","Team Comp + Dragon", "Team Comp + First Blood", "Team Comp + Rift Herald", "Objectives"])
+    model_options = st.selectbox('Please select a model to use. ', ["Team Comp + Baron","Team Comp + Dragon", "Team Comp + Rift Herald", "Objectives"])
     st.write(model_options)
     infile = open("champ_labels.json","r")
     champ_labels = json.load(infile)
@@ -183,7 +184,7 @@ elif options == "Predictors":
         st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
 
     elif model_options == "Objectives":
-        st.write("Model Accuracy on Test Set: 90.9%")
+        st.write("Model Accuracy on Test Set: 86.7%")
         st.write("Team 1:")
         b_1 = int(st.selectbox("Team 1 Baron First", [True,False]))
         d_1 = int(st.selectbox("Team 1 Dragon First", [True,False]))
