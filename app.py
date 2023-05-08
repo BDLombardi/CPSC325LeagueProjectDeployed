@@ -28,7 +28,7 @@ if options == "Account Summary":
     if text_input != "":
         username = text_input
         #api_key = 'RGAPI-7c56ac6e-237c-476b-9ca9-4ee2fe089ca4'  
-        api_key = st.secrets["KEY"]
+        api_key = st.secrets["key"]
         watcher1 = LolWatcher(api_key)
         my_region = 'na1'
 
