@@ -182,4 +182,27 @@ elif options == "Predictors":
         y_pred = comp_fb.predict(X_test)
         st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
 
+    elif model_options == "Objectives":
+        st.write("Model Accuracy on Test Set: 57.6%")
+        st.write("Team 1:")
+        b_1 = int(st.selectbox("Team 1 Baron First", [True,False]))
+        d_1 = int(st.selectbox("Team 1 Dragon First", [True,False]))
+        c_1 = int(st.selectbox("Team 1 First Blood", [True,False]))
+        i_1 = int(st.selectbox("Team 1 Inhibitor First", [True,False]))
+        h_1 = int(st.selectbox("Team 1 Rift Herald First", [True,False]))
+        t_1 = int(st.selectbox("Team 1 Tower First", [True,False]))
+
+        st.write("Team 2:")
+        b_2 = int(st.selectbox("Team 2 Baron First", [True,False]))
+        d_2 = int(st.selectbox("Team 2 Dragon First", [True,False]))
+        c_2 = int(st.selectbox("Team 2 First Blood", [True,False]))
+        i_2 = int(st.selectbox("Team 2 Inhibitor First", [True,False]))
+        h_2 = int(st.selectbox("Team 2 Rift Herald First", [True,False]))
+        t_2 = int(st.selectbox("Team 2 Tower First", [True,False]))
+
+        X_test = [[b_1,d_1,c_1,i_1,h_1,t_1,b_2,d_2,c_2,i_2,h_2,t_2]]
+        comp_fb = joblib.load('pred_models/obj/121-0.2676.hdf5')
+        y_pred = comp_fb.predict(X_test)
+        st.write("Predicted Winning Team: ", np.argmax(y_pred)+1)
+
         
