@@ -10,6 +10,7 @@ import json
 import tensorflow as tf
 import joblib
 import sklearn
+from seaborn import objects as so
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
@@ -75,8 +76,8 @@ if options == "Account Summary":
         champ_levels = []
         labels = []
         for entry in champ_mast:
-            mast_scores.append(entry["championPoints"])
-            champ_levels.append(entry["championLevel"])
+            mast_scores.append(entry["championPoints"] + np.random.rand(1)[0] * 4000)
+            champ_levels.append(entry["championLevel"] + np.random.rand(1)[0] * 0.4)
             labels.append(champ_mast_labels_rev[entry["championId"]])
 
         df = pd.DataFrame({
