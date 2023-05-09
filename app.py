@@ -48,7 +48,11 @@ if options == "Account Summary":
         level = []
         gold_spent = []
         champs_played = dict()
+        runes_used = dict()
         roles_played = {"TOP": 0, "JUNGLE": 0, "MIDDLE": 0,"BOTTOM": 0, "UTILITY": 0}
+        infile = open("rune_dict.json","r")
+        rune_keys = json.load(infile)
+        infile.close()
         for entry in data:
             idx = entry["metadata"]["participants"].index(me["puuid"])
             total_kills.append(entry["info"]["participants"][idx]["kills"])
@@ -65,6 +69,10 @@ if options == "Account Summary":
                 champs_played[entry["info"]["participants"][idx]["championName"]] +=1
             else: 
                 champs_played[entry["info"]["participants"][idx]["championName"]] =1
+            if rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])] in runes_used.keys():
+                runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])]] +=1
+            else: 
+                runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])]] =1
         champ_mast = watcher1.champion_mastery.by_summoner(my_region,me["id"])
         champs = watcher1.data_dragon.champions("13.7.1")
         champ_mast_labels = dict()
@@ -133,6 +141,11 @@ if options == "Account Summary":
         ax[0].bar(range(len(champs_played)),list(champs_played.values()),tick_label=list(champs_played.keys()))
         ax[1].bar(range(len(roles_played)),list(roles_played.values()),tick_label=list(roles_played.keys()))
         st.pyplot(fig)
+
+        fig,ax = plt.subplots(1,figsize=(20,10))
+        ax[0].bar(range(len(runes_used)),list(runes_used.values()),tick_labels=list(runes_used.keys()))
+        st.pyplot(fig)
+
 
 elif options == "Predictors":
     model_options = st.selectbox('Please select a model to use. ', ["Team Comp + Baron","Team Comp + Dragon", "Team Comp + Rift Herald", "Objectives"])
