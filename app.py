@@ -70,9 +70,9 @@ if options == "Account Summary":
             else: 
                 champs_played[entry["info"]["participants"][idx]["championName"]] =1
             if rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])] in runes_used.keys():
-                runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])]] +=1
+                runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])]] +=1
             else: 
-                runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])]] =1
+                runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])]] =1
         champ_mast = watcher1.champion_mastery.by_summoner(my_region,me["id"])
         champs = watcher1.data_dragon.champions("13.7.1")
         champ_mast_labels = dict()
