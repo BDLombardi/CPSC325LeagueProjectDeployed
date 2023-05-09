@@ -89,7 +89,7 @@ if options == "Account Summary":
         fig,ax = plt.subplots(figsize=(20,10))
         ax = sns.scatterplot(data = df, x =df.x[0:25],y= df.y[0:25], alpha = 0.5,s = df.s[0:25],hue = df.group[0:25])
 
-        for line in range(0,df.shape[0]):
+        for line in range(0,25):
             ax.text(df.x[line], df.y[line], df.group[line], horizontalalignment='center', size='medium', color='black', weight='semibold')
         ax.set_title("Top 25 Mastery Champions Bubble Chart")
         st.pyplot(fig)
@@ -114,7 +114,7 @@ if options == "Account Summary":
 
         ax[1,0].plot(game_count_list,gold)
         ax[1,0].plot(game_count_list,gold_spent)
-        ax[1,0].legend(["Gold"])
+        ax[1,0].legend(["Gold","Gold Spent"])
         ax[1,0].set_xlabel("Game Number")
         ax[1,0].set_ylabel("Count")
 
