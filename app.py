@@ -143,7 +143,7 @@ if options == "Account Summary":
         st.pyplot(fig)
 
         fig,ax = plt.subplots(1,figsize=(20,10))
-        ax[0].bar(range(len(runes_used)),list(runes_used.values()),tick_labels=list(runes_used.keys()))
+        ax.bar(range(len(runes_used)),list(runes_used.values()),tick_labels=list(runes_used.keys()))
         st.pyplot(fig)
 
 
