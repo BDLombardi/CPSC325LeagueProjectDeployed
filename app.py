@@ -69,7 +69,7 @@ if options == "Account Summary":
                 champs_played[entry["info"]["participants"][idx]["championName"]] +=1
             else: 
                 champs_played[entry["info"]["participants"][idx]["championName"]] =1
-            if rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"]["selections"][0]["perk"])] in runes_used.keys():
+            if rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])] in runes_used.keys():
                 runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])]] +=1
             else: 
                 runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])]] =1
