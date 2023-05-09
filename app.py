@@ -130,8 +130,8 @@ if options == "Account Summary":
         st.pyplot(fig)
 
         fig,ax = plt.subplots(2,figsize=(15,15))
-        ax[0].bar(range(len(champs_played)),list(champs_played.values),tick_label=list(champs_played.keys()))
-        ax[1].bar(range(len(roles_played)),list(roles_played.values),tick_label=list(roles_played.keys()))
+        ax[0].bar(range(len(champs_played)),list(champs_played.values()),tick_label=list(champs_played.keys()))
+        ax[1].bar(range(len(roles_played)),list(roles_played.values()),tick_label=list(roles_played.keys()))
         st.pyplot(fig)
 
 elif options == "Predictors":
