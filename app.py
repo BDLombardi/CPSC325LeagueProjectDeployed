@@ -87,10 +87,11 @@ if options == "Account Summary":
             'group': labels
         })
         fig,ax = plt.subplots(figsize=(20,10))
-        ax = sns.scatterplot(data = df, x =df.x,y= df.y, alpha = 0.5,s = df.s)
+        ax = sns.scatterplot(data = df, x =df.x[0:25],y= df.y[0:25], alpha = 0.5,s = df.s[0:25],hue = df.group[0:25])
 
         for line in range(0,df.shape[0]):
             ax.text(df.x[line], df.y[line], df.group[line], horizontalalignment='center', size='medium', color='black', weight='semibold')
+        ax.title("Top 25 Mastery Champions Bubble Chart")
         st.pyplot(fig)
 
         fig,ax = plt.subplots(2,2,figsize=(10,10))
@@ -100,19 +101,27 @@ if options == "Account Summary":
         ax[0,0].plot(game_count_list,total_assists)
         ax[0,0].plot(game_count_list,total_wards)
         ax[0,0].legend(["Kills","Deaths","Assists","Wards"])
+        ax[0,0].xlabel("Game Number")
+        ax[0,0].ylabel("Count")
 
 
         ax[0,1].plot(game_count_list,total_dam)
         ax[0,1].plot(game_count_list,dam_taken)
         ax[0,1].legend(["Damage Dealt to Champions", "Damage Taken"])
+        ax[0,1].xlabel("Game Number")
+        ax[0,1].ylabel("Count")
 
 
         ax[1,0].plot(game_count_list,gold)
         ax[1,0].plot(game_count_list,gold_spent)
         ax[1,0].legend(["Gold"])
+        ax[1,0].xlabel("Game Number")
+        ax[1,0].ylabel("Count")
 
         ax[1,1].plot(game_count_list,level)
         ax[1,1].legend(["Champion Level"])
+        ax[1,1].xlabel("Game Number")
+        ax[1,1].ylabel("Count")
 
         st.pyplot(fig)
 elif options == "Predictors":
