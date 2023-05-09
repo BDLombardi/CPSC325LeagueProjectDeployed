@@ -28,8 +28,6 @@ if options == "Account Summary":
     text_input = st.text_input('Account Name')
     if text_input != "":
         username = text_input
-        #api_key = 'RGAPI-7c56ac6e-237c-476b-9ca9-4ee2fe089ca4'  
-        st.write(st.secrets.keys())
         api_key = st.secrets['KEY']
         watcher1 = LolWatcher(api_key)
         my_region = 'na1'
@@ -49,6 +47,8 @@ if options == "Account Summary":
         gold = []
         level = []
         gold_spent = []
+        champs_played = dict()
+        roles_played = {"TOP": 0, "JUNGLE": 0, "MIDDLE": 0,"BOTTOM": 0, "UTILITY": 0}
         for entry in data:
             idx = entry["metadata"]["participants"].index(me["puuid"])
             total_kills.append(entry["info"]["participants"][idx]["kills"])
@@ -60,7 +60,11 @@ if options == "Account Summary":
             gold.append(entry["info"]["participants"][idx]["goldEarned"])
             level.append(entry["info"]["participants"][idx]["champLevel"])
             gold_spent.append(entry["info"]["participants"][idx]["goldSpent"])
-        
+            roles_played[entry["info"]["participants"][idx]["individualPosition"]] +=1
+            if entry["info"]["participants"][idx]["championName"] in champs_played.keys():
+                champs_played[entry["info"]["participants"][idx]["championName"]] +=1
+            else: 
+                champs_played[entry["info"]["participants"][idx]["championName"]] =1
         champ_mast = watcher1.champion_mastery.by_summoner(my_region,me["id"])
         champs = watcher1.data_dragon.champions("13.7.1")
         champ_mast_labels = dict()
@@ -84,13 +88,13 @@ if options == "Account Summary":
             'x': mast_scores,
             'y': champ_levels,
             's': mast_scores,
-            'group': labels
+            'champions': labels
         })
         fig,ax = plt.subplots(figsize=(20,10))
-        ax = sns.scatterplot(data = df, x =df.x[0:25],y= df.y[0:25], alpha = 0.5,s = df.s[0:25],hue = df.group[0:25])
+        ax = sns.scatterplot(data = df, x =df.x[0:25],y= df.y[0:25], alpha = 0.5,s = df.s[0:25],hue = df.champions[0:25])
 
         for line in range(0,25):
-            ax.text(df.x[line], df.y[line], df.group[line], horizontalalignment='center', size='medium', color='black', weight='semibold')
+            ax.text(df.x[line], df.y[line], df.champions[line], horizontalalignment='center', size='medium', color='black', weight='semibold')
         ax.set_title("Top 25 Mastery Champions Bubble Chart")
         st.pyplot(fig)
 
@@ -124,6 +128,12 @@ if options == "Account Summary":
         ax[1,1].set_ylabel("Count")
 
         st.pyplot(fig)
+
+        fig,ax = plt.subplots(2,figsize=(15,15))
+        ax[0].bar(range(len(champs_played)),list(champs_played.values),tick_label=list(champs_played.keys()))
+        ax[1].bar(range(len(roles_played)),list(roles_played.values),tick_label=list(roles_played.keys()))
+        st.pyplot(fig)
+
 elif options == "Predictors":
     model_options = st.selectbox('Please select a model to use. ', ["Team Comp + Baron","Team Comp + Dragon", "Team Comp + Rift Herald", "Objectives"])
     st.write(model_options)
