@@ -121,7 +121,7 @@ if options == "Account Summary":
             's': mast_scores,
             'champions': labels
         })
-        fig,ax = plt.subplots(figsize=(20,10))
+        fig,ax = plt.subplots(figsize=(30,15))
         ax = sns.scatterplot(data = df, x =df.x[0:25],y= df.y[0:25], alpha = 0.5,s = df.s[0:25],hue = df.champions[0:25])
 
         for line in range(0,25):
@@ -131,7 +131,7 @@ if options == "Account Summary":
         ax.set_ylabel("Champion Mastery Level")
         st.pyplot(fig)
 
-        fig,ax = plt.subplots(2,3,figsize=(30,20))
+        fig,ax = plt.subplots(2,3,figsize=(40,20))
         fig.suptitle("Match Key Performance Indicator")
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
