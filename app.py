@@ -10,6 +10,7 @@ import json
 import tensorflow as tf
 import joblib
 import sklearn
+from statistics import mean
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
@@ -128,7 +129,7 @@ if options == "Account Summary":
         ax.set_ylabel("Champion Mastery Level")
         st.pyplot(fig)
 
-        fig,ax = plt.subplots(2,3,figsize=(20,20))
+        fig,ax = plt.subplots(2,3,figsize=(30,20))
         fig.suptitle("Match Key Performance Indicator")
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
@@ -195,10 +196,23 @@ if options == "Account Summary":
         ax.plot(game_count_list,game_time)
         ax.plot(game_count_list,longest_life)
         ax.set_title("Deaths, Game Time, and Longest Life")
-        ax.legend(["Deaths","Game Length","Longest Life"])
+        ax.legend(["Deaths","Game Length (Mins)","Longest Life (Mins)"])
         ax.set_xlabel("Game Number")
         ax.set_ylabel("Count")
         st.pyplot(fig)
+
+        st.header("Summary Statistics")
+        st.write("Avg Kills: " + str(mean(total_kills)))
+        st.write("Avg Deaths: " + str(mean(total_deaths)))
+        st.write("Avg Assists: " + str(mean(total_assists)))
+        st.write("Avg KDA: " + str((mean(total_kills)+mean(total_assists))/mean(total_deaths)))
+        st.write("Avg Damage Dealt: " + str(mean(total_dam)))
+        st.write("Avg Damage Taken: " + str(mean(dam_taken)))
+        st.write("Avg Vision Score: " + str(mean(vis_score)))
+        st.write("Avg Gold Earned: " + str(mean(gold)))
+        st.write("Avg Minions Killed: " + str(mean(total_minions)))
+        st.write("Avg Longest Life: ", str(mean(longest_life)))
+        st.write("Avg Life Duration: " + str(mean(game_time)/mean(total_deaths)))
 
 
 
