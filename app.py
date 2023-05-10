@@ -26,6 +26,8 @@ st.write(options)
 if options == "Account Summary":
     st.write("Please enter a Account name on the North American Server")
     text_input = st.text_input('Account Name')
+    st.write("Please enter how many games you would like to view data on (Max 100 Games).")
+    game_count = int(st.text_input('Game Count'))
     if text_input != "":
         username = text_input
         api_key = st.secrets['KEY']
@@ -104,9 +106,12 @@ if options == "Account Summary":
         for line in range(0,25):
             ax.text(df.x[line], df.y[line], df.champions[line], horizontalalignment='center', size='medium', color='black', weight='semibold')
         ax.set_title("Top 25 Mastery Champions Bubble Chart")
+        ax.set_xlabel("Champion Mastery Score")
+        ax.set_ylabel("Champion Mastery Level")
         st.pyplot(fig)
 
         fig,ax = plt.subplots(2,2,figsize=(10,10))
+        ax.set_title("Match Key Performance Indicator")
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
         ax[0,0].plot(game_count_list,total_deaths)
@@ -139,11 +144,14 @@ if options == "Account Summary":
 
         fig,ax = plt.subplots(2,figsize=(15,15))
         ax[0].bar(range(len(champs_played)),list(champs_played.values()),tick_label=list(champs_played.keys()))
+        ax[0].set_title("Recent Champions Played")
         ax[1].bar(range(len(roles_played)),list(roles_played.values()),tick_label=list(roles_played.keys()))
+        ax[1].set_title("Recent Roles Played")
         st.pyplot(fig)
 
         fig,ax = plt.subplots(1,figsize=(20,10))
         ax.bar(range(len(runes_used)),list(runes_used.values()),tick_label=list(runes_used.keys()))
+        ax.set_title("Recent Rune Keystones Used")
         st.pyplot(fig)
 
 
