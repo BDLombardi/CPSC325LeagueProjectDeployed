@@ -11,6 +11,11 @@ import tensorflow as tf
 import joblib
 import sklearn
 from statistics import mean
+import matplotlib
+
+SMALL_SIZE = 15
+matplotlib.rc('font', size=SMALL_SIZE)
+matplotlib.rc('axes', titlesize=SMALL_SIZE)
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
