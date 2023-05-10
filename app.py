@@ -195,6 +195,7 @@ if options == "Account Summary":
         ax.plot(game_count_list,game_time)
         ax.plot(game_count_list,longest_life)
         ax.set_title("Deaths, Game Time, and Longest Life")
+        ax.legend(["Deaths","Game Length","Longest Life"])
         ax.set_xlabel("Game Number")
         ax.set_ylabel("Count")
         st.pyplot(fig)
