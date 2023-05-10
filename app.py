@@ -80,7 +80,7 @@ if options == "Account Summary":
             vis_score.append(entry["info"]["participants"][idx]["visionScore"])
             wards_bought.append(entry["info"]["participants"][idx]["visionWardsBoughtInGame"])
             longest_life.append(entry["info"]["participants"][idx]["longestTimeSpentLiving"]/60)
-            game_time.append(entry["info"]["participants"][idx]["gameLength"]/60)
+            game_time.append(entry["info"]["participants"][idx]["timePlayed"]/60)
             if entry["info"]["participants"][idx]["championName"] in champs_played.keys():
                 champs_played[entry["info"]["participants"][idx]["championName"]] +=1
             else: 
