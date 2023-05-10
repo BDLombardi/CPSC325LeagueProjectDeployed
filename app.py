@@ -36,7 +36,7 @@ if options == "Account Summary":
         my_region = 'na1'
 
         me = watcher1.summoner.by_name(my_region, username)
-        game_count = 20
+        #game_count = 20
         my_match_ids = watcher1.match.matchlist_by_puuid(my_region, me['puuid'],count=game_count)
         data = []
         for entry in my_match_ids:
