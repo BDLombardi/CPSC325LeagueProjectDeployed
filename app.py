@@ -13,7 +13,6 @@ import sklearn
 from statistics import mean
 import matplotlib
 
-FONT_SIZE = 15
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
@@ -139,8 +138,8 @@ if options == "Account Summary":
         ax[0,0].plot(game_count_list,total_deaths)
         ax[0,0].plot(game_count_list,total_assists)
         ax[0,0].legend(["Kills","Deaths","Assists"])
-        ax[0,0].set_xlabel("Game Number",fontsize=FONT_SIZE)
-        ax[0,0].set_ylabel("Count",fontsize=FONT_SIZE)
+        ax[0,0].set_xlabel("Game Number")
+        ax[0,0].set_ylabel("Count")
 
 
         ax[0,1].plot(game_count_list,total_dam)
