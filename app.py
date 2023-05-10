@@ -27,8 +27,9 @@ if options == "Account Summary":
     st.write("Please enter a Account name on the North American Server")
     text_input = st.text_input('Account Name')
     st.write("Please enter how many games you would like to view data on (Max 100 Games).")
-    game_count = int(st.text_input('Game Count'))
-    if text_input != "":
+    game_count = st.text_input('Game Count')
+    if text_input != "" and game_count != "":
+        game_count = int(game_count)
         username = text_input
         api_key = st.secrets['KEY']
         watcher1 = LolWatcher(api_key)
@@ -111,7 +112,7 @@ if options == "Account Summary":
         st.pyplot(fig)
 
         fig,ax = plt.subplots(2,2,figsize=(10,10))
-        ax.set_title("Match Key Performance Indicator")
+        fig.suptitle("Match Key Performance Indicator")
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
         ax[0,0].plot(game_count_list,total_deaths)
