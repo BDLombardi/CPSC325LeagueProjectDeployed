@@ -10,7 +10,6 @@ import json
 import tensorflow as tf
 import joblib
 import sklearn
-from seaborn import objects as so
 
 st.write("""
         # CPSC 325 League of Legends Dashboard and Predictor
@@ -165,8 +164,8 @@ if options == "Account Summary":
         ax[1,1].set_xlabel("Game Number")
         ax[1,1].set_ylabel("Count")
 
-        ax[1,2].plot(game_count,total_minions)
-        ax[1,2].plot(game_count,total_neutral_minions)
+        ax[1,2].plot(game_count_list,total_minions)
+        ax[1,2].plot(game_count_list,total_neutral_minions)
         ax[1,2].legend(["Total Minions Killed", "Total Neutral Minions Killed"])
         ax[1,2].set_xlabel("Game Number")
         ax[1,2].set_ylabel("Count")
@@ -192,9 +191,9 @@ if options == "Account Summary":
         st.pyplot(fig)
 
         fig,ax = plt.subplots(1,figsize=(20,10))
-        ax.plot(game_count,total_deaths)
-        ax.plot(game_count,game_time)
-        ax.plot(game_count,longest_life)
+        ax.plot(game_count_list,total_deaths)
+        ax.plot(game_count_list,game_time)
+        ax.plot(game_count_list,longest_life)
         ax.set_title("Deaths, Game Time, and Longest Life")
         ax.set_xlabel("Game Number")
         ax.set_ylabel("Count")
