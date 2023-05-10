@@ -3,7 +3,7 @@ import time
 from riotwatcher import LolWatcher, ApiError, RiotWatcher
 import random
 
-api_key = 'RGAPI-7c56ac6e-237c-476b-9ca9-4ee2fe089ca4'  
+api_key = 'Insert Key Here'  
 watcher1 = LolWatcher(api_key)
 my_region = 'na1'
 
