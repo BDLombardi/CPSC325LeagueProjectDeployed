@@ -45,11 +45,18 @@ if options == "Account Summary":
         total_deaths = []
         total_dam = []
         total_wards = []
+        vis_score = []
+        wards_bought = []
         total_assists = []
         dam_taken = []
         gold = []
         level = []
         gold_spent = []
+        total_minions = []
+        total_neutral_minions = []
+        longest_life = []
+        game_time = []
+        wins = {"Wins":0,"Losses": 0}
         champs_played = dict()
         runes_used = dict()
         roles_played = {"TOP": 0, "JUNGLE": 0, "MIDDLE": 0,"BOTTOM": 0, "UTILITY": 0}
@@ -67,7 +74,13 @@ if options == "Account Summary":
             gold.append(entry["info"]["participants"][idx]["goldEarned"])
             level.append(entry["info"]["participants"][idx]["champLevel"])
             gold_spent.append(entry["info"]["participants"][idx]["goldSpent"])
+            total_minions.append(entry["info"]["participants"][idx]["totalMinionsKilled"])
+            total_neutral_minions.append(entry["info"]["participants"][idx]["neutralMinionsKilled"])
             roles_played[entry["info"]["participants"][idx]["individualPosition"]] +=1
+            vis_score.append(entry["info"]["participants"][idx]["visionScore"])
+            wards_bought.append(entry["info"]["participants"][idx]["visionWardsBoughtInGame"])
+            longest_life.append(entry["info"]["participants"][idx]["longestTimeSpentLiving"]/60)
+            game_time.append(entry["info"]["participants"][idx]["gameLength"]/60)
             if entry["info"]["participants"][idx]["championName"] in champs_played.keys():
                 champs_played[entry["info"]["participants"][idx]["championName"]] +=1
             else: 
@@ -76,6 +89,11 @@ if options == "Account Summary":
                 runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])]] +=1
             else: 
                 runes_used[rune_keys[str(entry["info"]["participants"][idx]["perks"]["styles"][0]["selections"][0]["perk"])]] =1
+            if entry["info"]["participants"][idx]["win"] == True:
+                wins["Wins"] +=1
+            else: 
+                wins["Losses"] +=1
+            
         champ_mast = watcher1.champion_mastery.by_summoner(my_region,me["id"])
         champs = watcher1.data_dragon.champions("13.7.1")
         champ_mast_labels = dict()
@@ -111,14 +129,13 @@ if options == "Account Summary":
         ax.set_ylabel("Champion Mastery Level")
         st.pyplot(fig)
 
-        fig,ax = plt.subplots(2,2,figsize=(10,10))
+        fig,ax = plt.subplots(2,3,figsize=(10,10))
         fig.suptitle("Match Key Performance Indicator")
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
         ax[0,0].plot(game_count_list,total_deaths)
         ax[0,0].plot(game_count_list,total_assists)
-        ax[0,0].plot(game_count_list,total_wards)
-        ax[0,0].legend(["Kills","Deaths","Assists","Wards"])
+        ax[0,0].legend(["Kills","Deaths","Assists"])
         ax[0,0].set_xlabel("Game Number")
         ax[0,0].set_ylabel("Count")
 
@@ -128,6 +145,13 @@ if options == "Account Summary":
         ax[0,1].legend(["Damage Dealt to Champions", "Damage Taken"])
         ax[0,1].set_xlabel("Game Number")
         ax[0,1].set_ylabel("Count")
+
+        ax[0,2].plot(game_count_list,total_wards)
+        ax[0,2].plot(game_count_list,vis_score)
+        ax[0,2].plot(game_count_list,wards_bought)
+        ax[0,2].legend(["Totals Wards Placed", "Vision Score", "Wards Bought"])
+        ax[0,2].set_xlabel("Game Number")
+        ax[0,2].set_ylabel("Count")
 
 
         ax[1,0].plot(game_count_list,gold)
@@ -140,6 +164,13 @@ if options == "Account Summary":
         ax[1,1].legend(["Champion Level"])
         ax[1,1].set_xlabel("Game Number")
         ax[1,1].set_ylabel("Count")
+
+        ax[1,2].plot(game_count,total_minions)
+        ax[1,2].plot(game_count,total_neutral_minions)
+        ax[1,2].legend(["Total Minions Killed", "Total Neutral Minions Killed"])
+        ax[1,2].set_xlabel("Game Number")
+        ax[1,2].set_ylabel("Count")
+
 
         st.pyplot(fig)
 
@@ -154,6 +185,21 @@ if options == "Account Summary":
         ax.bar(range(len(runes_used)),list(runes_used.values()),tick_label=list(runes_used.keys()))
         ax.set_title("Recent Rune Keystones Used")
         st.pyplot(fig)
+
+        fig,ax = plt.subplots(1,figsize=(20,10))
+        ax.bar(range(len(wins)),list(wins.values()),tick_labels=list(wins.keys()))
+        ax.set_title("Wins vs. Losses")
+        st.pyplot(fig)
+
+        fig,ax = plt.subplots(1,figsize=(20,10))
+        ax.plot(game_count,total_deaths)
+        ax.plot(game_count,game_time)
+        ax.plot(game_count,longest_life)
+        ax.set_title("Deaths, Game Time, and Longest Life")
+        ax.set_xlabel("Game Number")
+        ax.set_ylabel("Count")
+        st.pyplot(fig)
+
 
 
 elif options == "Predictors":
