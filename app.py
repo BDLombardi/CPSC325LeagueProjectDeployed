@@ -128,7 +128,7 @@ if options == "Account Summary":
         ax.set_ylabel("Champion Mastery Level")
         st.pyplot(fig)
 
-        fig,ax = plt.subplots(2,3,figsize=(10,10))
+        fig,ax = plt.subplots(2,3,figsize=(20,20))
         fig.suptitle("Match Key Performance Indicator")
         game_count_list = [ i for i in range(game_count)]
         ax[0,0].plot(game_count_list,total_kills)
@@ -186,7 +186,7 @@ if options == "Account Summary":
         st.pyplot(fig)
 
         fig,ax = plt.subplots(1,figsize=(20,10))
-        ax.bar(range(len(wins)),list(wins.values()),tick_labels=list(wins.keys()))
+        ax.bar(range(len(wins)),list(wins.values()),tick_label=list(wins.keys()))
         ax.set_title("Wins vs. Losses")
         st.pyplot(fig)
 
