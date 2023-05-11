@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     callbacks = [
         tf.keras.callbacks.ModelCheckpoint(
-            os.path.join("C:/Users/squat/OneDrive/Desktop/CPSC322/CPSC325/CPSC325_Project", 'ckpt', "{epoch:02d}-{val_loss:.4f}.hdf5"),
+            os.path.join('ckpt', "{epoch:02d}-{val_loss:.4f}.hdf5"),
             monitor = 'val_loss',
             verbose = 0,
             save_best_only = True,

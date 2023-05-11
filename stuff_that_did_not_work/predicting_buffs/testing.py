@@ -5,7 +5,7 @@ import os
 df = pd.read_csv("winrates_csv\League of Legends Champion Stats 12.1.csv")
 df_buffs = pd.read_csv("buffs.csv",header=0)
 
-files = os.listdir("C:\\Users\\squat\\OneDrive\\Desktop\\CPSC322\\CPSC325\\CPSC325_Project\\winrates_csv")
+files = os.listdir("winrates_csv")
 
 x = []
 y = []

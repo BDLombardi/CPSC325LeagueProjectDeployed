@@ -21,7 +21,7 @@ st.write("""
         This website is designed to help players visualize their own account data, as well as offer various ML models to help predict the winners of games. 
          """)
 
-
+st.write("Note that too many requests to the Account Summary Endpoint may result in a API request limit error from the RIOT API if too many users are requesting the endpoint")
 options = st.selectbox('Choose what endpoint that you want to engage with.', ["Account Summary","Predictors"])
 st.write(options)
 
